@@ -1,0 +1,46 @@
+
+:host {
+    display: block;
+    span {
+        text-decoration-thickness: 2px;
+    }
+}
+
+.status p:first-of-type {
+    animation: pulse 1.5s infinite;
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.status-online span:first-of-type {
+    color: rgb(38, 153, 38);
+    text-decoration: underline;
+}
+
+.status-offline span:first-of-type {
+    color: rgb(226, 59, 59);
+    text-decoration: line-through;
+}
+
+.status-unknown span:first-of-type {
+    color: rgb(255, 170, 0);
+    text-decoration: rgb(255, 170, 0) dashed underline;
+}
+
+p:last-of-type {
+    margin: 0;
+    color: #696969;
+}
+
+@keyframes pulse {
+    0% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      opacity: 1;
+    }
+}

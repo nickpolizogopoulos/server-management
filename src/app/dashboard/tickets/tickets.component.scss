@@ -1,0 +1,73 @@
+
+$font-red: rgb(224, 64, 64);
+
+:host {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 15rem;
+    }
+
+    li {
+        margin: 0.5rem 0;
+    }
+
+    h2 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #38343c;
+    }
+}
+
+//* SINGLE TICKET STYLING ==========================================
+.dot {
+    font-family: monospace;
+    color: gray;
+    margin: 0 5px 0 0;
+}
+
+mat-panel-title {
+    color: rgb(82, 82, 82);
+}
+
+.id-text {
+    color: grey;
+    font-size: 13px;
+    font-style: italic;
+    margin: 0 0 0 10px;
+    
+}
+
+.text-red {
+    font-size: 14px;
+    color: $font-red;
+    cursor: pointer;
+    &:hover {
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 2px;
+    }
+}
+
+.text-closed {
+    display: flex;
+    font-size: 14px;
+    color: rgb(0, 92, 187);
+    cursor: default;
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-underline-offset: 2px;
+}
+
+.icon-close {
+    cursor: pointer;
+    &:hover {
+        color: $font-red;
+        transform: rotate(90deg);
+    }
+}

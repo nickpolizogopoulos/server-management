@@ -1,0 +1,30 @@
+<mat-accordion>
+    @for (ticket of tickets; track $index) {
+        <mat-expansion-panel #panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{ $index + 1 }}
+                    <span class="dot">.</span>
+                    <span [style.color]=" ticket.status === 'closed' ? '#005cbb' : 'inherit'">{{ ticket.title }}</span>
+                    <span class="id-text">( id: #{{ ticket.id }} )</span>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <p>{{ ticket.request }}</p>
+            @if (ticket.status === 'open') {
+                <!-- <p (click)="deleteTicket( ticket.id )" class="text-red">delete</p> -->
+                <p (click)="markTicketClosed( ticket.id )" class="text-red">Mark as closed</p>
+            }
+            @else {
+                <p class="text-closed"><mat-icon fontIcon="check"></mat-icon>This ticket is closed</p>
+            }
+        </mat-expansion-panel>
+    } 
+    @empty { <p class="closed-ticket">No tickets available.</p> }
+</mat-accordion>
+@if (addTicketButtonVisible()) {
+    <button mat-raised-button (click)="onAddTicketOrCloseForm()">Add ticket</button>
+}
+@if (formVisible()) {
+    <mat-icon fontIcon="close" class="icon-close" (click)="onAddTicketOrCloseForm()" matTooltip="Close Form" [matTooltipPosition]="'right'"  />
+    <app-new-ticket (addTicket)="addTicket($event)" (onShowText)="onAddTicketOrCloseForm()" />
+}

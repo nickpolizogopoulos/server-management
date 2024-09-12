@@ -1,0 +1,27 @@
+
+#chart {
+    height: 12rem;
+    display: flex;
+    align-items: flex-end;
+    gap: 0.7rem;
+    border-bottom: 1px solid #898989;
+    padding: 0 5px;
+    width: 100%;
+
+    div {
+        flex: 1;
+        background: linear-gradient(to bottom, rgb(0, 92, 187), rgb(192, 197, 225) );
+        border-radius: 4px 4px 0 0;
+        border: 1px solid rgba(76, 79, 125, 0.264);
+        border-bottom: none;
+        box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        &:hover {
+            transition: all .2s ease-in-out;
+            background: linear-gradient(to bottom, rgb(0, 104, 208), rgb(216, 221, 253) );
+            border: 1px solid rgba(76, 79, 125, 0.5);
+            border-bottom: none;
+            box-shadow: 2px 0px 7px rgba(0, 0, 0, 0.5);
+        }
+    }
+}

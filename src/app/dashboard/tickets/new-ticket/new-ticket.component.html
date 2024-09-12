@@ -1,0 +1,13 @@
+<form (ngSubmit)="onSubmit(title.value, request.value)" #form>
+    <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput name="title" id="title" #title>
+      </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Request</mat-label>
+        <textarea matInput name="request" id="request" #request></textarea>
+    </mat-form-field>
+    
+    <button mat-raised-button>Submit</button>
+</form>
