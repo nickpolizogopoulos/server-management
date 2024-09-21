@@ -1,8 +1,9 @@
 
 #chart {
-    height: 12rem;
+    height: 11rem;
     display: flex;
     align-items: flex-end;
+    justify-content: center;
     gap: 0.7rem;
     border-bottom: 1px solid #898989;
     padding: 0 5px;
@@ -10,6 +11,7 @@
 
     div {
         flex: 1;
+        max-width: 30px;
         background: linear-gradient(to bottom, rgb(0, 92, 187), rgb(192, 197, 225) );
         border-radius: 4px 4px 0 0;
         border: 1px solid rgba(76, 79, 125, 0.264);
@@ -24,4 +26,9 @@
             box-shadow: 2px 0px 7px rgba(0, 0, 0, 0.5);
         }
     }
+}
+
+mat-slider {
+    width: 100%;
+    margin-bottom: 15px;
 }

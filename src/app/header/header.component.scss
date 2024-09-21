@@ -1,6 +1,11 @@
 @import '../../styles.scss';
 
+$transition: all .2s ease-in-out;
+$faded-black: rgba(0, 0, 0, 0.1);
+$blue: rgb(0, 92, 187);
+
 :host {
+  transition: $transition;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -8,10 +13,11 @@
   gap: 0;
   padding: 15px 150px;
   font-size: 1.1rem;
-  backdrop-filter: blur(5px);
-  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.1);;
+  backdrop-filter: blur(7px);
+  border-bottom: 1px solid $faded-black;
+  box-shadow: 0px 7px 30px $faded-black;
 
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     font-size: 1rem;
     flex-direction: column;
     align-items: center;
@@ -26,7 +32,7 @@
   background-color: white;
   padding: 0.8rem;
   border-radius: 50%;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 0 10px $faded-black;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -40,22 +46,37 @@
 }
 
 nav ul {
+  transition: $transition;
   display: flex;
-  gap: 2rem;
+  gap: 3.2rem;
   list-style: none;
   align-items: center;
   padding: 0;
   margin: 0;
+
+  @media screen and (max-width: 530px) {
+    margin-top: 1.5rem;
+    flex-direction: column;
+    gap: 2rem;
+    
+  }
 }
 
 nav ul li a {
+  display: flex;
+  align-items: center;
   color: #2f2f2f;
   text-decoration: none;
   &:hover {
-    color: rgb(0, 92, 187);
+    color: $blue;
   }
 }
 
 .link-active {
-  color: rgb(0, 92, 187);
+  color: $blue;
+}
+
+mat-icon {
+  font-size: 21px;
+  margin-right: 5px;
 }

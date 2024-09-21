@@ -1,12 +1,9 @@
-import { AfterViewInit, Component, ElementRef, output, viewChild } from '@angular/core'; 
+import { Component, inject, output, signal } from '@angular/core'; 
 import { FormsModule } from '@angular/forms';
 
 import { Material_Components } from '../../../utilities/material-components';
+import { TicketsService } from '../tickets.service';
 
-export interface SubmittedTicket {
-  title:string;
-  request:string;
-}
 
 @Component({
   selector: 'app-new-ticket',
@@ -15,31 +12,64 @@ export interface SubmittedTicket {
     Material_Components,
     FormsModule
   ],
-  templateUrl: './new-ticket.component.html',
-  styleUrl: './new-ticket.component.scss'
-})
-export class NewTicketComponent implements AfterViewInit {
-
-  private form = viewChild.required<ElementRef<HTMLFormElement>>('form');
-
-  addTicket = output<SubmittedTicket>();
-  onShowText = output<void>();
+  template: `
   
+    <form (ngSubmit)="onSubmit()" #form>
+      <mat-form-field>
+        <mat-label>Title</mat-label>
+        <input matInput name="title" id="title" [(ngModel)]="title">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Request</mat-label>
+        <textarea matInput name="request" id="request" [(ngModel)]="request"></textarea>
+      </mat-form-field>
+      @if (formErrorMessage()) {
+        <small>{{ formErrorMessage() }}</small>
+      }
+      <button mat-raised-button>Submit</button>
+    </form>
+  
+  `,
+  styles: `
+    
+    form {
+        display: flex;
+        flex-direction: column;
+    }
 
-  ngAfterViewInit():void {
-    console.log('AFTER VIEW INIT');
-  }
+    small {
+        color: rgb(224, 64, 64);
+        margin-bottom: 20px;
+    }
+      
+  `
+})
+export class NewTicketComponent {
 
-  onSubmit( title:string, request:string ):void {
+  title = signal<string>('');
+  request = signal<string>('');
+  formErrorMessage = signal <string | null> (null);
+  closeForm = output<void>();
+  
+  private ticketsService = inject(TicketsService);
 
-    this.addTicket.emit({
-      title: title,
-      request: request
-    });
+  onSubmit():void {
 
-    this.onShowText.emit();
+    //* Basic Form Validation (CBA TD / Reactive now).
+    const title = this.title().trim() === '';
+    const summary = this.request().trim() === '';
+    if (title || summary) {
+      this.formErrorMessage.set('Please, enter title and text!');
+      return;
+    }
 
-    this.form()?.nativeElement.reset();
+    const newTicket = { title: this.title(), request: this.request() };
+    
+    this.ticketsService.addTicket(newTicket);
+
+    this.closeForm.emit();
+
+    this.formErrorMessage.set(null);
   }
 
 }

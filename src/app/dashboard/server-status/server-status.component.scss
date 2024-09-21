@@ -6,9 +6,21 @@
     }
 }
 
+p span {
+    display: inline-flex;
+    mat-icon {
+        margin-left: 3px;
+    }
+}
+
+mat-form-field {
+    margin-top: 30px;
+    width: 100%;
+}
+
 .status p:first-of-type {
     animation: pulse 1.5s infinite;
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 .5rem 0;
     font-size: 1.1rem;
     font-weight: 500;
 }
@@ -20,12 +32,12 @@
 
 .status-offline span:first-of-type {
     color: rgb(226, 59, 59);
-    text-decoration: line-through;
+    text-decoration: dotted underline;
 }
 
 .status-unknown span:first-of-type {
     color: rgb(255, 170, 0);
-    text-decoration: rgb(255, 170, 0) dashed underline;
+    text-decoration: dashed underline;
 }
 
 p:last-of-type {

@@ -1,22 +1,27 @@
-<div 
-  [class]="{
-    status : true,
-    'status-online' : currentStatus() === 'online',
-    'status-offline' : currentStatus() === 'offline',
-    'status-unknown': currentStatus() === 'unknown'
-  }"
->
+<div [class]="{
+  'status' : true,
+  'status-online' : currentStatus() === 'online',
+  'status-offline' : currentStatus() === 'offline',
+  'status-unknown': currentStatus() === 'unknown'
+}">
   @if (currentStatus() === 'online') {
-    <p>Servers are <span>online</span></p>
+    <p>Server status: <span>online<mat-icon class="material-icons-outlined" fontIcon="task_alt" /></span></p>
     <p>All systems are operational.</p>
   } 
   @else if (currentStatus() === 'offline') {
-    <p>Servers are <span>offline</span></p>
+    <p>Server status: <span>offline<mat-icon class="material-icons-outlined" fontIcon="unpublished" /></span></p>
     <p>Functionality should be restored soon.</p>
   }
   @else {
-    <p>Server status is <span>unknown</span></p>
+    <p>Server status: <span>unknown<mat-icon class="material-icons-outlined" fontIcon="info" /></span></p>
     <p>Fetching server status failed.</p>
   }
-
+  <mat-form-field>
+    <mat-label>Manage State</mat-label>
+    <mat-select>
+        <mat-option (click)="setStatus('online')" value="online">Online</mat-option>
+        <mat-option (click)="setStatus('offline')" value="offline">Offline</mat-option>
+        <mat-option (click)="setStatus('unknown')" value="unknown">Unknown</mat-option>
+    </mat-select>
+  </mat-form-field>
 </div>

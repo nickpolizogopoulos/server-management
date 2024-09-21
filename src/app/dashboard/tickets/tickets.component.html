@@ -1,30 +1,40 @@
+<section>
+    <p>Filter:</p>
+    <p [class.selected]="selectedFilter() === 'open'" (click)="onFilter('open')"><span class="open">open</span></p>
+    <p [class.selected]="selectedFilter() === 'closed'" (click)="onFilter('closed')"><span class="closed">closed</span></p>
+    <p [class.selected]="selectedFilter() === 'all'" (click)="onFilter('all')"><span class="all">show all</span></p>
+</section>
 <mat-accordion>
-    @for (ticket of tickets; track $index) {
+    @for (ticket of tickets(); track $index) {
         <mat-expansion-panel #panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     {{ $index + 1 }}
                     <span class="dot">.</span>
                     <span [style.color]=" ticket.status === 'closed' ? '#005cbb' : 'inherit'">{{ ticket.title }}</span>
-                    <span class="id-text">( id: #{{ ticket.id }} )</span>
+                    <span class="id-text">&mdash; id: #{{ ticket.id }}</span>
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <p>{{ ticket.request }}</p>
+            <p class="ticket-request-text">{{ ticket.request }}</p>
             @if (ticket.status === 'open') {
-                <!-- <p (click)="deleteTicket( ticket.id )" class="text-red">delete</p> -->
-                <p (click)="markTicketClosed( ticket.id )" class="text-red">Mark as closed</p>
+                <p (click)="markTicketClosed( ticket.id )" class="text-red"><mat-icon fontIcon="trending_flat"></mat-icon>Mark as closed</p>
             }
             @else {
                 <p class="text-closed"><mat-icon fontIcon="check"></mat-icon>This ticket is closed</p>
+
+                <section class="delete-move">
+                    <p (click)="deleteTicket( ticket.id )" class="text-red"><mat-icon fontIcon="close_small" />delete</p>
+                    <p (click)="markAsOpen( ticket.id )" class="text-mark-open"><mat-icon fontIcon="restart_alt" />mark as open</p>
+                </section>
             }
         </mat-expansion-panel>
     } 
-    @empty { <p class="closed-ticket">No tickets available.</p> }
+    @empty { <p class="text-closed">No tickets available.</p> }
 </mat-accordion>
-@if (addTicketButtonVisible()) {
-    <button mat-raised-button (click)="onAddTicketOrCloseForm()">Add ticket</button>
-}
 @if (formVisible()) {
-    <mat-icon fontIcon="close" class="icon-close" (click)="onAddTicketOrCloseForm()" matTooltip="Close Form" [matTooltipPosition]="'right'"  />
-    <app-new-ticket (addTicket)="addTicket($event)" (onShowText)="onAddTicketOrCloseForm()" />
+    <mat-icon fontIcon="close" class="close-form-icon" (click)="onAddTicketOrCloseForm()" matTooltip="Close Form" [matTooltipPosition]="'right'"  />
+    <app-new-ticket (closeForm)="onAddTicketOrCloseForm()" />
+}
+@else {
+    <button mat-raised-button (click)="onAddTicketOrCloseForm()"><mat-icon fontIcon="add" />Add ticket</button>
 }

@@ -1,26 +1,50 @@
-
 $font-red: rgb(224, 64, 64);
+$font-blue: rgb(0, 92, 187);
+$font-green: rgb(64, 105, 68);
 
 :host {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
 
-    ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-        width: 15rem;
-    }
-
-    li {
-        margin: 0.5rem 0;
-    }
-
     h2 {
         margin: 0;
         font-size: 1.1rem;
         color: #38343c;
+    }
+}
+
+section {
+    display: flex;
+    justify-content: space-around;
+
+    p {
+        padding: 5px 14px;
+        font-size: 14px;
+        user-select: none;
+    }
+
+    .open,
+    .closed,
+    .all {
+        cursor: pointer;
+    }
+
+    .open {
+        color: inherit;
+    }
+    
+    .closed {
+        color: $font-blue;
+    }
+    
+    .all {
+        color: $font-green;
+    }
+
+    .selected {
+        border-radius: 50px;
+        box-shadow: .5px 1.5px 7px rgba(0, 0, 0, 0.2);
     }
 }
 
@@ -44,19 +68,29 @@ mat-panel-title {
 }
 
 .text-red {
-    font-size: 14px;
+    font-size: 17px;
     color: $font-red;
-    cursor: pointer;
+}
+
+.text-mark-open,
+.text-red {
+    font-size: 17px;
     &:hover {
+        cursor: pointer;
         text-decoration: underline;
         text-decoration-thickness: 2px;
         text-underline-offset: 2px;
     }
 }
 
-.text-closed {
+.text-red,
+.text-closed,
+.text-mark-open {
     display: flex;
     font-size: 14px;
+}
+
+.text-closed {
     color: rgb(0, 92, 187);
     cursor: default;
     text-decoration: underline;
@@ -64,10 +98,18 @@ mat-panel-title {
     text-underline-offset: 2px;
 }
 
-.icon-close {
+.close-form-icon {
     cursor: pointer;
     &:hover {
         color: $font-red;
         transform: rotate(90deg);
     }
+}
+
+p mat-icon {
+    margin-right: 7px;
+}
+
+.ticket-request-text {
+    font-style: italic;
 }

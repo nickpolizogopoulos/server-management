@@ -1,10 +1,10 @@
-import { Component, signal, viewChild } from '@angular/core';
-
-import { Ticket } from './ticket.model';
-import { Material_Components } from '../../utilities/material-components';
-import { NewTicketComponent, SubmittedTicket } from "./new-ticket/new-ticket.component";
+import { Component, computed, inject, OnInit, signal, viewChild } from '@angular/core';
 
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+
+import { Material_Components } from '../../utilities/material-components';
+import { NewTicketComponent } from "./new-ticket/new-ticket.component";
+import { TicketsService } from './tickets.service';
 
 @Component({
   selector: 'app-tickets',
@@ -17,63 +17,87 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.scss'
 })
-export class TicketsComponent {
+export class TicketsComponent implements OnInit {
 
-  //* to close all the panels 
+  //* for closing all panels.
   private accordion = viewChild.required(MatAccordion);
-  private closeAll = (): void => this.accordion().closeAll();
-
-  formVisible = signal<boolean>(false);
-  addTicketButtonVisible = signal<boolean>(true);
-
-  onAddTicketOrCloseForm():void {
-    this.formVisible.update( state => !state );
-    this.addTicketButtonVisible.update( state => !state );
-    this.closeAll();
+  private closeAllPanels(): void {
+    this.accordion().closeAll();
   }
 
-  // deleteTicket( id:string ):void {
-  //   const ticket = this.tickets.find( t => t.id === id );
-  //   const index = this.tickets.indexOf(ticket!);
-  //   this.tickets.splice(index, 1); 
-  //   this.closeAll();
-  // }
+  //* = Code to avoid calling this.closeAllPanels(); method in every other method.
+  private withPanelCloseMeth(fn: (...args: any[]) => void): (...args: any[]) => void {
+    return (...args: any[]) => {
+      fn.apply(this, args);
+      this.closeAllPanels();
+    };
+  }
   
-  markTicketClosed( id:string ):void {
-    const ticket = this.tickets.find( t => t.id === id );
-    const index = this.tickets.indexOf(ticket!);
-    this.tickets[index].status = 'closed';
-    this.closeAll();
+  ngOnInit(): void {
+    this.onFilter = this.withPanelCloseMeth(this.onFilter.bind(this));
+    this.onAddTicketOrCloseForm = this.withPanelCloseMeth(this.onAddTicketOrCloseForm.bind(this));
+    this.deleteTicket = this.withPanelCloseMeth(this.deleteTicket.bind(this));
+    this.markAsOpen = this.withPanelCloseMeth(this.markAsOpen.bind(this));
+    this.markTicketClosed = this.withPanelCloseMeth(this.markTicketClosed.bind(this));
   }
+  //* =============
 
-  addTicket( ticketData:SubmittedTicket ):void {
+  private ticketsService = inject(TicketsService);
+  selectedFilter = signal<string>('all');
 
-    this.closeAll();
+  tickets = computed(() => {
 
-    const ticket:Ticket = {
-      title: ticketData.title,
-      request: ticketData.request,
-      id: Math.floor(Date.now() % 500).toString(), //* random number generator
-      status: 'open'
-    }
+    //* I like ternary more than switch / case.
+    return this.selectedFilter() === 'open'
+      ? this.ticketsService
+          .getTickets()
+          .filter( task => task.status === 'open' )
 
-    this.tickets.push(ticket);
+      : this.selectedFilter() === 'closed'
+      ? this.ticketsService
+          .getTickets()
+          .filter( task => task.status === 'closed' )
+          
+      : this.ticketsService.getTickets();
     
+    //* But switch/case works as well.
+    // switch (this.selectedFilter()) {
+    //   case 'all':
+    //     return this.ticketsService.getTickets();
+    //   case 'open':
+    //     return this.ticketsService
+    //       .getTickets()
+    //       .filter( task => task.status === 'open' );
+    //   case 'closed':
+    //     return this.ticketsService
+    //       .getTickets()
+    //       .filter( task => task.status === 'closed' );
+    //   default:
+    //     return this.ticketsService.getTickets();
+    // }
+
+  });
+  
+  formVisible = signal<boolean>(false);
+  
+  onFilter( filter: 'open' | 'closed' | 'all' ): void {
+    this.selectedFilter.set(filter);
   }
 
-  tickets:Ticket[] = [
-    {
-      title: 'Computer broken',
-      request: 'My computer is not working, please help me fix that!',
-      id: '500',
-      status: 'closed'
-    },
-    {
-      title: 'Software update',
-      request: 'Please assist me in updating my computer.',
-      id: '200',
-      status: 'open'
-    }
-  ];
+  onAddTicketOrCloseForm(): void {
+    this.formVisible.set( !this.formVisible() );
+  }
+
+  deleteTicket( id: string ): void {
+    this.ticketsService.deleteTicket(id);
+  }
+
+  markAsOpen( id: string ): void {
+    this.ticketsService.markTicketOpen(id);
+  }
+  
+  markTicketClosed( id: string ): void {
+    this.ticketsService.markTicketClosed(id);
+  }
 
 }

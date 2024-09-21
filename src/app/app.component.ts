@@ -18,8 +18,27 @@ import { DashboardItemComponent } from "./dashboard/dashboard-item/dashboard-ite
     TrafficComponent,
     TicketsComponent,
     DashboardItemComponent
-],
-  templateUrl: './app.component.html',
+  ],
+  template: `
+  
+    <header appHeader></header>
+    <main>
+
+        <app-dashboard-item [title]="'Server Status'" icon="dvr">
+          <app-server-status />
+        </app-dashboard-item>
+
+        <app-dashboard-item [title]="'Traffic'" icon="group">
+          <app-traffic />
+        </app-dashboard-item>
+
+        <app-dashboard-item [title]="'Support Tickets'" icon="edit">
+          <app-tickets />
+        </app-dashboard-item>
+
+    </main>
+
+  `,
   styleUrl: './app.component.scss'
 })
 export class AppComponent implements OnInit {
