@@ -37,15 +37,16 @@ $blue: rgb(0, 92, 187);
   display: flex;
   justify-content: center;
   align-items: center;
+
+  img {
+    width: 140%;
+    height: 100%;
+    user-select: none;
+  }
 }
 
-#logo img {
-  width: 140%;
-  height: 100%;
-  user-select: none;
-}
 
-nav ul {
+ul {
   transition: $transition;
   display: flex;
   gap: 3.2rem;
@@ -62,21 +63,14 @@ nav ul {
   }
 }
 
-nav ul li a {
-  display: flex;
-  align-items: center;
+a {
   color: #2f2f2f;
   text-decoration: none;
   &:hover {
     color: $blue;
   }
-}
-
-.link-active {
-  color: $blue;
-}
-
-mat-icon {
-  font-size: 21px;
-  margin-right: 5px;
+  
+  &.link-active {
+    color: $blue;
+  }
 }

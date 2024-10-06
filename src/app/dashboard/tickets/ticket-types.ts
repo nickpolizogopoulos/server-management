@@ -1,4 +1,7 @@
 
+export type TicketStatus = 'open' 
+    | 'closed' 
+    | 'all';
 
 export type Ticket = {
     id:string;
@@ -11,4 +14,3 @@ export type TicketData = {
     title:string;
     request:string;
 }
-

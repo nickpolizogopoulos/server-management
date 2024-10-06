@@ -1,8 +1,9 @@
 <section>
-    <p>Filter:</p>
-    <p [class.selected]="selectedFilter() === 'open'" (click)="onFilter('open')"><span class="open">open</span></p>
-    <p [class.selected]="selectedFilter() === 'closed'" (click)="onFilter('closed')"><span class="closed">closed</span></p>
-    <p [class.selected]="selectedFilter() === 'all'" (click)="onFilter('all')"><span class="all">show all</span></p>
+    <mat-chip-listbox aria-label="Ticket status options" multiple="false">
+        <mat-chip-option [matBadge]="selectedFilter() === 'open' ? (tickets().length === 0 ? '' : tickets().length) : ''" matBadgeOverlap="true" (click)="onFilter('open')">Open</mat-chip-option>
+        <mat-chip-option [matBadge]="selectedFilter() === 'closed' ? (tickets().length === 0 ? '' : tickets().length) : ''" matBadgeOverlap="true" (click)="onFilter('closed')">Closed</mat-chip-option>
+        <mat-chip-option [matBadge]="selectedFilter() === 'all' ? (tickets().length === 0 ? '' : tickets().length) : ''" matBadgeOverlap="true" (click)="onFilter('all')" selected>Show all</mat-chip-option>
+    </mat-chip-listbox>
 </section>
 <mat-accordion>
     @for (ticket of tickets(); track $index) {
@@ -15,7 +16,7 @@
                     <span class="id-text">&mdash; id: #{{ ticket.id }}</span>
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <p class="ticket-request-text">{{ ticket.request }}</p>
+            <p class="ticket-request-text">"{{ ticket.request }}"</p>
             @if (ticket.status === 'open') {
                 <p (click)="markTicketClosed( ticket.id )" class="text-red"><mat-icon fontIcon="trending_flat"></mat-icon>Mark as closed</p>
             }
@@ -29,7 +30,19 @@
             }
         </mat-expansion-panel>
     } 
-    @empty { <p class="text-closed">No tickets available.</p> }
+    @empty { 
+        <p class="text-closed">
+            No
+            {{ 
+                selectedFilter() === 'open'
+                ? 'open' 
+                : selectedFilter() === 'closed'
+                ? 'closed'
+                : ''
+            }}
+            tickets available.
+        </p>
+    }
 </mat-accordion>
 @if (formVisible()) {
     <mat-icon fontIcon="close" class="close-form-icon" (click)="onAddTicketOrCloseForm()" matTooltip="Close Form" [matTooltipPosition]="'right'"  />

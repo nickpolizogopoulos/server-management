@@ -1,12 +1,8 @@
 import { Component, signal } from '@angular/core';
-
-import { Material_Components } from '../../utilities/material-components';
 import { FormsModule } from '@angular/forms';
 
-type TrafficData = {
-  id: string;
-  value: number;
-}
+import { Material_Components } from '../../utilities/material-components';
+import { type TrafficData,  dummyTrafficData } from './dummy-traffic-data';
 
 @Component({
   selector: 'app-traffic',
@@ -44,7 +40,7 @@ type TrafficData = {
 })
 export class TrafficComponent {
 
-  days = signal<number>(8);
+  days = signal<number>(7);
 
   onSliderMove(event: any): void {
     const value = (event.target as HTMLInputElement).valueAsNumber;
@@ -56,48 +52,7 @@ export class TrafficComponent {
     return this.dummyTrafficData().slice(0, currentDays);
   }
   
-  private dummyTrafficData = signal<TrafficData[]>([
-    {
-      id: 'd1',
-      value: 433
-    },
-    {
-      id: 'd2',
-      value: 260
-    },
-    {
-      id: 'd3',
-      value: 290
-    },
-    {
-      id: 'd4',
-      value: 410
-    },
-    {
-      id: 'd5',
-      value: 320
-    },
-    {
-      id: 'd6',
-      value: 488
-    },
-    {
-      id: 'd7',
-      value: 260
-    },
-    {
-      id: 'd8',
-      value: 367
-    },
-    {
-      id: 'd9',
-      value: 210
-    },
-    {
-      id: 'd10',
-      value: 460
-    }
-  ]);
+  private dummyTrafficData = signal<TrafficData[]>(dummyTrafficData);
 
   maxTraffic = Math.max( ...this.dummyTrafficData().map( data => data.value ) );
   

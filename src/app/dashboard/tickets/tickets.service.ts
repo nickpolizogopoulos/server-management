@@ -1,11 +1,14 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 
-import { type TicketData, type Ticket } from './types';
+import { type TicketData, type Ticket } from './ticket-types';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TicketsService {
+
+  private snackBar = inject(MatSnackBar);
 
   addTicket( ticketData: TicketData ): void {
 
@@ -14,6 +17,11 @@ export class TicketsService {
       id: crypto.randomUUID().substring(0, 4), //* random number generator (4 characters)
       status: 'open'
     }
+
+    this.snackBar.open(
+      `Ticket "${ticketData.title}" has been added!`,
+      'close'
+    );
     
     this.tickets.update( tickets => [...tickets, newTicket] );
   }
@@ -67,6 +75,6 @@ export class TicketsService {
     }
   ]);
 
-  getTickets = this.tickets.asReadonly();
+  allTickets = this.tickets.asReadonly();
 
 }

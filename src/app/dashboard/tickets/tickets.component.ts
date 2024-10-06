@@ -1,10 +1,19 @@
-import { Component, computed, inject, OnInit, signal, viewChild } from '@angular/core';
+import {
+  Component,
+  computed,
+  inject,
+  OnInit,
+  signal, 
+  ViewChild, 
+  viewChild
+} from '@angular/core';
 
 import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 
 import { Material_Components } from '../../utilities/material-components';
 import { NewTicketComponent } from "./new-ticket/new-ticket.component";
 import { TicketsService } from './tickets.service';
+import { type TicketStatus } from './ticket-types';
 
 @Component({
   selector: 'app-tickets',
@@ -25,14 +34,13 @@ export class TicketsComponent implements OnInit {
     this.accordion().closeAll();
   }
 
-  //* = Code to avoid calling this.closeAllPanels(); method in every other method.
-  private withPanelCloseMeth(fn: (...args: any[]) => void): (...args: any[]) => void {
+  //* = Code to avoid calling this.closeAllPanels(); method in every other method. =============
+  private withPanelCloseMeth( fn: (...args: any[]) => void): (...args: any[]) => void {
     return (...args: any[]) => {
       fn.apply(this, args);
       this.closeAllPanels();
     };
   }
-  
   ngOnInit(): void {
     this.onFilter = this.withPanelCloseMeth(this.onFilter.bind(this));
     this.onAddTicketOrCloseForm = this.withPanelCloseMeth(this.onAddTicketOrCloseForm.bind(this));
@@ -40,7 +48,7 @@ export class TicketsComponent implements OnInit {
     this.markAsOpen = this.withPanelCloseMeth(this.markAsOpen.bind(this));
     this.markTicketClosed = this.withPanelCloseMeth(this.markTicketClosed.bind(this));
   }
-  //* =============
+  //* = Code to avoid calling this.closeAllPanels(); method in every other method. =============
 
   private ticketsService = inject(TicketsService);
   selectedFilter = signal<string>('all');
@@ -50,15 +58,15 @@ export class TicketsComponent implements OnInit {
     //* I like ternary more than switch / case.
     return this.selectedFilter() === 'open'
       ? this.ticketsService
-          .getTickets()
+          .allTickets()
           .filter( task => task.status === 'open' )
 
       : this.selectedFilter() === 'closed'
       ? this.ticketsService
-          .getTickets()
+          .allTickets()
           .filter( task => task.status === 'closed' )
           
-      : this.ticketsService.getTickets();
+      : this.ticketsService.allTickets();
     
     //* But switch/case works as well.
     // switch (this.selectedFilter()) {
@@ -80,7 +88,7 @@ export class TicketsComponent implements OnInit {
   
   formVisible = signal<boolean>(false);
   
-  onFilter( filter: 'open' | 'closed' | 'all' ): void {
+  onFilter( filter: TicketStatus ): void {
     this.selectedFilter.set(filter);
   }
 
