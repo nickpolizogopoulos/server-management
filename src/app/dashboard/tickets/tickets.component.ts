@@ -3,8 +3,7 @@ import {
   computed,
   inject,
   OnInit,
-  signal, 
-  ViewChild, 
+  signal,
   viewChild
 } from '@angular/core';
 
@@ -13,7 +12,7 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { Material_Components } from '../../utilities/material-components';
 import { NewTicketComponent } from "./new-ticket/new-ticket.component";
 import { TicketsService } from './tickets.service';
-import { type TicketStatus } from './ticket-types';
+import { TicketData, type TicketStatus } from './ticket-types';
 
 @Component({
   selector: 'app-tickets',
@@ -35,6 +34,7 @@ export class TicketsComponent implements OnInit {
   }
 
   //* = Code to avoid calling this.closeAllPanels(); method in every other method. =============
+  //* junior dev thought: I am doing a 13 line operation here just to avoid a "this.closeAllPanels();" at the end of each method. idk... w/e.
   private withPanelCloseMeth( fn: (...args: any[]) => void): (...args: any[]) => void {
     return (...args: any[]) => {
       fn.apply(this, args);
@@ -107,5 +107,4 @@ export class TicketsComponent implements OnInit {
   markTicketClosed( id: string ): void {
     this.ticketsService.markTicketClosed(id);
   }
-
 }

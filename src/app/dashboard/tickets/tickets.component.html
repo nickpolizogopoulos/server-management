@@ -1,4 +1,4 @@
-<section>
+<section class="chips">
     <mat-chip-listbox aria-label="Ticket status options" multiple="false">
         <mat-chip-option [matBadge]="selectedFilter() === 'open' ? (tickets().length === 0 ? '' : tickets().length) : ''" matBadgeOverlap="true" (click)="onFilter('open')">Open</mat-chip-option>
         <mat-chip-option [matBadge]="selectedFilter() === 'closed' ? (tickets().length === 0 ? '' : tickets().length) : ''" matBadgeOverlap="true" (click)="onFilter('closed')">Closed</mat-chip-option>
@@ -21,9 +21,9 @@
                 <p (click)="markTicketClosed( ticket.id )" class="text-red"><mat-icon fontIcon="trending_flat"></mat-icon>Mark as closed</p>
             }
             @else {
-                <p class="text-closed"><mat-icon fontIcon="check"></mat-icon>This ticket is closed</p>
+                <p class="text-ticket-closed"><mat-icon fontIcon="check"></mat-icon>This ticket is closed</p>
 
-                <section class="delete-move">
+                <section class="delete-or-move">
                     <p (click)="deleteTicket( ticket.id )" class="text-red"><mat-icon fontIcon="close_small" />delete</p>
                     <p (click)="markAsOpen( ticket.id )" class="text-mark-open"><mat-icon fontIcon="restart_alt" />mark as open</p>
                 </section>
@@ -31,21 +31,13 @@
         </mat-expansion-panel>
     } 
     @empty { 
-        <p class="text-closed">
-            No
-            {{ 
-                selectedFilter() === 'open'
-                ? 'open' 
-                : selectedFilter() === 'closed'
-                ? 'closed'
-                : ''
-            }}
+        <p class="text-ticket-closed">No
+            {{ selectedFilter() === 'open' ? 'open' : selectedFilter() === 'closed' ? 'closed' : '' }}
             tickets available.
         </p>
     }
 </mat-accordion>
 @if (formVisible()) {
-    <mat-icon fontIcon="close" class="close-form-icon" (click)="onAddTicketOrCloseForm()" matTooltip="Close Form" [matTooltipPosition]="'right'"  />
     <app-new-ticket (closeForm)="onAddTicketOrCloseForm()" />
 }
 @else {

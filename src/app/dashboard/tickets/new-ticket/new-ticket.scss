@@ -1,0 +1,46 @@
+
+$font-red: rgb(224, 64, 64);
+$font-blue: rgb(0, 92, 187);
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    margin-bottom: 30px;
+}
+
+small {
+    color: rgb(224, 64, 64);
+    margin-bottom: 20px;
+}
+
+section {
+    &.form-close-test {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    
+    .form-close-icon,
+    .form-test-icon {
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .form-close-icon {
+        &:hover {
+            color: rgb(224, 64, 64);
+        }
+    }
+
+    .form-test-icon {
+        font-size: 25px;
+        cursor: pointer;
+        &:hover {
+            color: rgb(0, 92, 187);
+        }
+    }
+}

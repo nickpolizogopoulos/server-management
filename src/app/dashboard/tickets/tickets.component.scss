@@ -1,3 +1,5 @@
+@use '../../utilities/material-styles.scss';
+
 $font-red: rgb(224, 64, 64);
 $font-blue: rgb(0, 92, 187);
 $font-green: rgb(64, 105, 68);
@@ -15,8 +17,18 @@ $font-green: rgb(64, 105, 68);
 }
 
 section {
-    display: flex;
-    justify-content: space-around;
+
+    &.chips {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    &.delete-or-move {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
 }
 
 //* SINGLE TICKET STYLING ==========================================
@@ -55,13 +67,13 @@ mat-panel-title {
 }
 
 .text-red,
-.text-closed,
+.text-ticket-closed,
 .text-mark-open {
     display: flex;
     font-size: 14px;
 }
 
-.text-closed {
+.text-ticket-closed {
     color: rgb(0, 92, 187);
     cursor: default;
     text-decoration: underline;
@@ -69,17 +81,10 @@ mat-panel-title {
     text-underline-offset: 2px;
 }
 
-.close-form-icon {
-    cursor: pointer;
-    &:hover {
-        color: $font-red;
-        transform: rotate(90deg);
-    }
-}
 
-p mat-icon {
-    margin-right: 7px;
-}
+// p mat-icon {
+//     margin-right: 7px;
+// }
 
 .ticket-request-text {
     font-style: italic;
@@ -89,6 +94,3 @@ p mat-icon {
 //* ================================================================
 
 
-mat-chip-option {
-    box-shadow: 0 1px 2px rgb(149, 149, 149);
-}
