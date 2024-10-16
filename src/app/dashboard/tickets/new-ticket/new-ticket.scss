@@ -17,6 +17,7 @@ small {
 }
 
 section {
+
     &.form-close-test {
         display: flex;
         flex-direction: row;
@@ -43,4 +44,5 @@ section {
             color: rgb(0, 92, 187);
         }
     }
+    
 }

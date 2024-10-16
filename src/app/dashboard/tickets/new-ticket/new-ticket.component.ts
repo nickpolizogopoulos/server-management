@@ -1,4 +1,4 @@
-import { Component, inject, Input, input, output, signal, SimpleChanges, viewChild } from '@angular/core'; 
+import { Component, inject, output, signal, viewChild } from '@angular/core'; 
 import { FormsModule, NgForm } from '@angular/forms';
 
 import { Material_Components } from '../../../utilities/material-components';
@@ -16,7 +16,7 @@ import { TicketData } from '../ticket-types';
 
     <section class="form-close-test">
       <mat-icon (click)="onClose()" fontIcon="close" class="form-close-icon" matTooltip="Close Form" [matTooltipPosition]="'right'"  />
-      <mat-icon (click)="onTestPopulate()" fontIcon="edit_note" class="form-test-icon" matTooltip="Populate with test information" [matTooltipPosition]="'left'"  /> 
+      <mat-icon (click)="quickRebootTicket()" fontIcon="edit_note" class="form-test-icon" matTooltip="Quick reboot ticket" [matTooltipPosition]="'left'"  /> 
     </section>
   
     <form (ngSubmit)="onSubmit(form)" #form="ngForm">
@@ -69,17 +69,17 @@ export class NewTicketComponent {
     this.formErrorMessage.set(null);
     
     //* typical reset - optional because the component dismounts on submit.
-    formData.form.reset();
+    // formData.form.reset();
   }
   
   onClose(): void {
     this.closeForm.emit();
   }
 
-  onTestPopulate(): void {
+  quickRebootTicket(): void {
     const testValue: TicketData = {
-      title: 'Backup Failed',
-      request: 'Please reboot System B.'
+      title: 'Reboot Required',
+      request: 'Please reboot all Systems'
     };
     this.form().setValue(testValue);
   }
