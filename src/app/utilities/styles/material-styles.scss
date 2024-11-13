@@ -1,15 +1,12 @@
-
-//* INPUT - background ===================================
+//* INPUT - background =====================================
 .mdc-text-field--filled:not(.mdc-text-field--disabled),
-.mat-mdc-form-field-focus-overlay
-{
+.mat-mdc-form-field-focus-overlay {
   background-color: transparent !important;
 }
 
-//* OPTION - single option background ====================
+//* OPTION - single option background ======================
 .mat-mdc-option,
-.mdc-list-item
-{
+.mdc-list-item {
   background-color: transparent !important;
   transition: all .1s linear;
   &:hover {
@@ -17,9 +14,8 @@
   }
 }
 
-//* OPTION - options panel background ====================
-#mat-select-0-panel
-{
+//* OPTION - options panel background ======================
+#mat-select-0-panel {
   backdrop-filter: blur(9px) !important;
   background-color: rgba(255, 255, 255, 0.4) !important;
 }
@@ -29,9 +25,8 @@
 //   background-color: rgb(238, 238, 238) !important;
 // }
   
-//* SNACKBAR =============================================
-.mat-mdc-snackbar-surface
-{
+//* SNACKBAR ===============================================
+.mat-mdc-snackbar-surface {
   margin-bottom: 15px;
   color: black !important;
   backdrop-filter: blur(10px) !important;
@@ -42,13 +37,12 @@
   }
 }
 
-//* BADGE ================================================
-.mat-badge-content
-{
+//* BADGE ==================================================
+.mat-badge-content {
   z-index: 100 !important;
 }
 
-//* CHIPS ================================================
+//* CHIPS ==================================================
 mat-chip-option {
   box-shadow: 0 1px 2px rgb(149, 149, 149);
 }

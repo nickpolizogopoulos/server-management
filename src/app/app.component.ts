@@ -1,6 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import {
+  Component,
+  inject,
+  OnInit
+} from '@angular/core';
 import { Title } from '@angular/platform-browser';
-import { RouterOutlet } from '@angular/router';
 
 import { HeaderComponent } from "./header/header.component";
 import { DashboardItemComponent } from "./dashboard/dashboard-item.component";
@@ -12,7 +15,6 @@ import { TicketsComponent } from './dashboard/tickets/tickets.component';
   selector: 'app-root',
   standalone: true,
   imports: [
-    RouterOutlet,
     HeaderComponent,
     ServerStatusComponent,
     TrafficComponent,
@@ -41,7 +43,6 @@ import { TicketsComponent } from './dashboard/tickets/tickets.component';
   `,
   styles: `
   
-
     main {
       margin: 5rem 10rem;
       display: flex;
@@ -67,7 +68,7 @@ export class AppComponent implements OnInit {
 
   private title = inject(Title);
 
-  ngOnInit():void {  
+  ngOnInit(): void {
     this.title.setTitle('Server Management');
   }
 

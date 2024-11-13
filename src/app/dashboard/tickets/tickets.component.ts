@@ -12,7 +12,8 @@ import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
 import { Material_Components } from '../../utilities/material-components';
 import { NewTicketComponent } from "./new-ticket/new-ticket.component";
 import { TicketsService } from './tickets.service';
-import { TicketData, type TicketStatus } from './ticket-types';
+import { type TicketStatus } from './ticket-types';
+import { SubstringPipe } from '../../utilities/substring.pipe';
 
 @Component({
   selector: 'app-tickets',
@@ -20,7 +21,8 @@ import { TicketData, type TicketStatus } from './ticket-types';
   imports: [
     Material_Components,
     NewTicketComponent,
-    MatExpansionModule
+    MatExpansionModule,
+    SubstringPipe
 ],
   templateUrl: './tickets.component.html',
   styleUrl: './tickets.component.scss'
@@ -52,6 +54,8 @@ export class TicketsComponent implements OnInit {
 
   private ticketsService = inject(TicketsService);
   selectedFilter = signal<string>('all');
+
+  ticketIdSubstring = signal<number>(4);
 
   tickets = computed(() => {
 

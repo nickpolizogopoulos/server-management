@@ -1,7 +1,8 @@
 
-export type Status = 'Online' 
-    | 'Offline' 
-    | 'Unknown';
+export type Status = 
+  'Online' 
+| 'Offline' 
+| 'Unknown';
 
 export type Server = {
     name: string;

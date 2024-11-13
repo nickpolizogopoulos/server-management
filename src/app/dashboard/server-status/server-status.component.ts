@@ -1,7 +1,15 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  Component,
+  inject,
+  signal
+} from '@angular/core';
 
 import { Material_Components } from '../../utilities/material-components';
-import { type Status, type Server, serverData } from './servers';
+import {
+  type Status,
+  type Server,
+  serverData
+} from './servers';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -39,7 +47,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
           </mat-select>
         </mat-form-field>
         
-        <mat-tree #tree [dataSource]="dataSource" [childrenAccessor]="childrenAccessor" class="tree">
+        <mat-tree #tree [dataSource]="dataSource()" [childrenAccessor]="childrenAccessor" class="tree">
           <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding="1.5">{{node.name}}</mat-tree-node>
           <mat-tree-node *matTreeNodeDef="let node; when: hasChild" class="child">
             <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name">
@@ -77,7 +85,7 @@ export class ServerStatusComponent {
 
   allServerOptions = this.serverOptions.asReadonly();
 
-  dataSource = serverData;
+  dataSource = signal<Server[]>(serverData);
   childrenAccessor = (node: Server) => node.children ?? [];
   hasChild = (_: number, node: Server) => !!node.children && node.children.length > 0;
   

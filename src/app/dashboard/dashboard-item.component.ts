@@ -1,4 +1,7 @@
-import { Component, input } from '@angular/core';
+import {
+  Component,
+  input
+} from '@angular/core';
 
 import { Material_Components } from '../utilities/material-components';
 

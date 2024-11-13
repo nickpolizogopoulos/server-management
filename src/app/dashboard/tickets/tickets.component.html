@@ -13,12 +13,12 @@
                     {{ $index + 1 }}
                     <span class="dot">.</span>
                     <span [style.color]=" ticket.status === 'closed' ? '#005cbb' : 'inherit'">{{ ticket.title }}</span>
-                    <span class="id-text">&mdash; id: #{{ ticket.id }}</span>
+                    <span class="id-text">&mdash; id: #{{ ticket.id | substring:0:ticketIdSubstring() }}</span>
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <p class="ticket-request-text">"{{ ticket.request }}"</p>
             @if (ticket.status === 'open') {
-                <p (click)="markTicketClosed( ticket.id )" class="text-red"><mat-icon fontIcon="trending_flat"></mat-icon>Mark as closed</p>
+                <p (click)="markTicketClosed( ticket.id  )" class="text-red"><mat-icon fontIcon="trending_flat"></mat-icon>Mark as closed</p>
             }
             @else {
                 <p class="text-ticket-closed"><mat-icon fontIcon="check"></mat-icon>This ticket is closed</p>

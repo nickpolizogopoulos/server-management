@@ -1,18 +1,17 @@
-import { Component, signal } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import {
+  Component,
+  signal
+} from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { Material_Components } from '../utilities/material-components';
-
-interface NavLink {
-  name: string;
-  link: string;
-}
+import { NavLink } from './nav-link.type';
 
 @Component({
   selector: 'header[appHeader]',
   standalone: true,
   imports: [
-    RouterModule,
+    RouterLink,
     Material_Components
   ],
 
@@ -28,7 +27,7 @@ interface NavLink {
     </section>
     <nav>
       <ul>
-        @for (item of links(); track $index) {
+        @for (item of allLinks(); track $index) {
           <li>
             <a routerLink="{{ item.link }}" routerLinkActive="link-active">
               {{ item.name }}
@@ -62,5 +61,7 @@ export class HeaderComponent {
       link: '/settings'
     }
   ]);
+
+  allLinks = this.links.asReadonly();
 
 }

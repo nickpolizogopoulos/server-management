@@ -1,15 +1,19 @@
-import { Component, signal } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import {
+  Component,
+  signal
+} from '@angular/core';
 
 import { Material_Components } from '../../utilities/material-components';
-import { type TrafficData,  dummyTrafficData } from './dummy-traffic-data';
+import {
+  type TrafficData,
+  dummyTrafficData
+} from './dummy-traffic-data';
 
 @Component({
   selector: 'app-traffic',
   standalone: true,
   imports: [
     Material_Components,
-    FormsModule
   ],
   template: `
   
@@ -54,6 +58,9 @@ export class TrafficComponent {
   
   private dummyTrafficData = signal<TrafficData[]>(dummyTrafficData);
 
-  maxTraffic = Math.max( ...this.dummyTrafficData().map( data => data.value ) );
+  maxTraffic = Math.max( 
+    ...this.dummyTrafficData()
+      .map( data => data.value )
+  );
   
 }

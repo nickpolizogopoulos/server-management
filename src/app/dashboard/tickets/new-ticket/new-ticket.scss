@@ -1,6 +1,4 @@
-
-$font-red: rgb(224, 64, 64);
-$font-blue: rgb(0, 92, 187);
+@import '../../../utilities/styles/variables.scss';
 
 form {
     display: flex;
@@ -12,7 +10,7 @@ button {
 }
 
 small {
-    color: rgb(224, 64, 64);
+    color: $font-red;
     margin-bottom: 20px;
 }
 
@@ -33,7 +31,7 @@ section {
 
     .form-close-icon {
         &:hover {
-            color: rgb(224, 64, 64);
+            color: $font-red;
         }
     }
 
@@ -41,7 +39,7 @@ section {
         font-size: 25px;
         cursor: pointer;
         &:hover {
-            color: rgb(0, 92, 187);
+            color: $font-blue;
         }
     }
     

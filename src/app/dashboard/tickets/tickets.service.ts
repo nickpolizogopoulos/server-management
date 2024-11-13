@@ -1,6 +1,13 @@
-import { inject, Injectable, signal } from '@angular/core';
+import {
+  Injectable,
+  inject,
+  signal
+} from '@angular/core';
 
-import { type TicketData, type Ticket } from './ticket-types';
+import {
+  type TicketData,
+  type Ticket
+} from './ticket-types';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -14,7 +21,7 @@ export class TicketsService {
 
     const newTicket:Ticket = {
       ...ticketData,
-      id: crypto.randomUUID().substring(0, 4), //* random number generator (4 characters)
+      id: crypto.randomUUID(),
       status: 'open'
     }
 
@@ -46,7 +53,7 @@ export class TicketsService {
 
   markTicketOpen(id: string): void {
     this.tickets.update( tickets => 
-      tickets.map( ticket => 
+      tickets.map(ticket => 
         ticket.id === id 
         ? { ...ticket, status: 'open' }
         : ticket
