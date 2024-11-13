@@ -1,8 +1,8 @@
 @import '../../../utilities/styles/variables.scss';
+@import '../../../utilities/styles/utilities.scss';
 
 form {
-    display: flex;
-    flex-direction: column;
+    @include flex-layout(column, center, default);
 }
 
 button {
@@ -10,17 +10,14 @@ button {
 }
 
 small {
-    color: $font-red;
+    color: $red;
     margin-bottom: 20px;
 }
 
 section {
 
     &.form-close-test {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        @include flex-layout(row, space-between, center);
     }
     
     .form-close-icon,
@@ -31,7 +28,7 @@ section {
 
     .form-close-icon {
         &:hover {
-            color: $font-red;
+            color: $red;
         }
     }
 
@@ -39,7 +36,7 @@ section {
         font-size: 25px;
         cursor: pointer;
         &:hover {
-            color: $font-blue;
+            color: $blue;
         }
     }
     

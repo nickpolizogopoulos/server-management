@@ -1,9 +1,8 @@
 @import '../../utilities/styles/variables.scss';
+@import '../../utilities/styles/utilities.scss';
 
 :host {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    @include flex-layout(column, center, default, 1.5rem);
 
     h2 {
         margin: 0;
@@ -15,15 +14,11 @@
 section {
 
     &.chips {
-        display: flex;
-        justify-content: space-around;
+        @include flex-layout(row, space-around, default, 1.5rem);
     }
 
     &.delete-or-move {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
+        @include flex-layout(row, space-between, default);
     }
 }
 
@@ -48,7 +43,7 @@ mat-panel-title {
 
 .text-red {
     font-size: 17px;
-    color: $font-red;
+    color: $red;
 }
 
 .text-mark-open,

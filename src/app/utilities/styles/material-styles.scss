@@ -1,3 +1,5 @@
+@import '../../utilities/styles/variables.scss';
+
 //* INPUT - background =====================================
 .mdc-text-field--filled:not(.mdc-text-field--disabled),
 .mat-mdc-form-field-focus-overlay {
@@ -8,7 +10,7 @@
 .mat-mdc-option,
 .mdc-list-item {
   background-color: transparent !important;
-  transition: all .1s linear;
+  transition: $transition;
   &:hover {
     background-color: rgba(0, 0, 0, 0.09) !important;
   }
@@ -33,7 +35,7 @@
   background-color: transparent !important;
   
   button {
-    color: rgb(0, 92, 187) !important;
+    color: $blue !important;
   }
 }
 

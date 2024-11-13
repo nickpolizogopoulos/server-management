@@ -1,11 +1,9 @@
 @import '../../styles.scss';
 @import '../utilities/styles/variables.scss';
+@import '../utilities/styles/utilities.scss';
 
 :host {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
+  @include flex-layout(row, space-between, center, 0);
   transition: $transition;
   gap: 0;
   padding: 15px 150px;
@@ -13,28 +11,23 @@
   backdrop-filter: blur(7px);
   border-bottom: 1px solid $faded-black;
   box-shadow: 0px 7px 30px $faded-black;
-
+  
   @media (max-width: 900px) {
     font-size: 1rem;
-    flex-direction: column;
-    align-items: center;
+    @include flex-layout(column, center, 0.75);
     padding: 1.5rem 0.1rem;
-    gap: 0.75rem;
   }
 }
 
 #logo {
+  @include flex-layout(center, center, 0.75rem);
   width: 4.4rem;
   height: 4.4rem;
   background-color: white;
   padding: 0.8rem;
   border-radius: 50%;
-  box-shadow: 0 0 10px $faded-black;
   cursor: pointer;
-  
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  box-shadow: 0 0 10px $faded-black;
 
   img {
     width: 140%;
@@ -44,11 +37,9 @@
 }
 
 ul {
+  @include flex-layout(row, center, center, 3.2rem);
   transition: $transition;
-  display: flex;
-  gap: 3.2rem;
   list-style: none;
-  align-items: center;
   padding: 0;
   margin: 0;
 

@@ -22,6 +22,8 @@ import { Material_Components } from '../utilities/material-components';
 
   `,
   styles: `
+
+    @import '../utilities/styles/utilities.scss';
   
     :host {
       display: block;
@@ -41,10 +43,8 @@ import { Material_Components } from '../utilities/material-components';
       }
 
       header {
-        display: flex;
+        @include flex-layout(row, left, center, .75rem);
         padding: 0;
-        gap: 0.75rem;
-        align-items: center;
 
       img {
         width: 1.5rem;
@@ -61,7 +61,7 @@ import { Material_Components } from '../utilities/material-components';
     }
 
     mat-divider {
-    margin: 15px auto 25px auto;
+      margin: 15px auto 25px auto;
     }
   
   `
