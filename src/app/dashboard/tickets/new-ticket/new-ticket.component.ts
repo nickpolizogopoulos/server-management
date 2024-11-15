@@ -10,7 +10,7 @@ import {
   NgForm
 } from '@angular/forms';
 
-import { Material_Components } from '../../../utilities/material-components';
+import { Material_Components } from '../../../utilities/tools/material-components';
 import { TicketsService } from '../tickets.service';
 import { TicketData } from '../ticket-types';
 

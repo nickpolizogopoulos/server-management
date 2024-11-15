@@ -31,3 +31,25 @@ p {
 button {
   font-size: .9rem !important;
 }
+
+a {
+  position: relative;
+  color: $blue;
+  text-decoration: none;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 0;
+    height: 2px;
+    background-color: $blue;
+    transition: width 0.3s ease;
+  }
+  
+  &:hover::after {
+    width: 96%;
+  }
+  
+}

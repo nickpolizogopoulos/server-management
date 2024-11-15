@@ -7,13 +7,16 @@ import {
   viewChild
 } from '@angular/core';
 
-import { MatAccordion, MatExpansionModule } from '@angular/material/expansion';
+import {
+  MatAccordion,
+  MatExpansionModule
+} from '@angular/material/expansion';
 
-import { Material_Components } from '../../utilities/material-components';
+import { Material_Components } from '../../utilities/tools/material-components';
 import { NewTicketComponent } from "./new-ticket/new-ticket.component";
 import { TicketsService } from './tickets.service';
 import { type TicketStatus } from './ticket-types';
-import { SubstringPipe } from '../../utilities/substring.pipe';
+import { SubstringPipe } from '../../utilities/tools/substring.pipe';
 
 @Component({
   selector: 'app-tickets',

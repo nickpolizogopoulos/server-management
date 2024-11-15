@@ -4,7 +4,7 @@ import {
   signal
 } from '@angular/core';
 
-import { Material_Components } from '../../utilities/material-components';
+import { Material_Components } from '../../utilities/tools/material-components';
 import {
   type Status,
   type Server,

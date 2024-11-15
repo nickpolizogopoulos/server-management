@@ -3,7 +3,7 @@ import {
   input
 } from '@angular/core';
 
-import { Material_Components } from '../utilities/material-components';
+import { Material_Components } from '../utilities/tools/material-components';
 
 @Component({
   selector: 'app-dashboard-item',

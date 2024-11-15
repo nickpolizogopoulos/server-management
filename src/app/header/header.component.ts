@@ -4,7 +4,7 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
-import { Material_Components } from '../utilities/material-components';
+import { Material_Components } from '../utilities/tools/material-components';
 import { NavLink } from './nav-link.type';
 
 @Component({
