@@ -4,8 +4,6 @@ A mini project included in a course I took, about new syntax & features introduc
 I took the chance to use it to practice Angular Material and SASS by adding a lot of extras, aiming a beautiful Interface and a good User experience.
 It uses signals for a Zoneless result.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.0.
-
 ## The Project
 
 Uses Goolgle's [Angular Material](https://material.angular.io/) Component Library.
